@@ -1,8 +1,9 @@
 # rainbow
 
-2020-09-08 Upleveled Rainbow Color Generator :rainbow: :rainbow: :rainbow: :rainbow:
+:rainbow: :rainbow: 2020-09-08 Upleveled Rainbow Color Generator :rainbow: :rainbow:
 
 Great Way to generate randomly colored squares in the console.
+Github repository: https://github.com/thorinaboenke/rainbow
 
 TO RUN:
 
@@ -18,8 +19,8 @@ Accepts the following user arguments
 $ node index.js <color> <hue>
 ```
 
-{color:[red, orange, yellow, green, blue, purple, pink, monochrome]
-hue: [light, dark]}
+{color:['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'pink', 'monochrome']
+hue: ['light', 'dark']}
 
 ```sh
 $ node index.js ask

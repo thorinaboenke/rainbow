@@ -3,9 +3,24 @@ const chalk = require('chalk');
 const readline = require('readline-sync');
 const randomcolor = require('randomcolor');
 
+// Object with accepted inputs
+const allowedInput = {
+  color: [
+    'red',
+    'orange',
+    'yellow',
+    'green',
+    'blue',
+    'purple',
+    'pink',
+    'monochrome',
+  ],
+  hue: ['light', 'dark'],
+};
+
 //initialize a random hex color variable and print it out
 let colorChoice = randomcolor();
-let symbol = '#';
+const symbol = '#';
 
 // get the user input from the process.argv if supplied//const Args = process.argv[2].split('x');
 // creates an array from third argument onwards
@@ -13,8 +28,8 @@ const Args = process.argv.slice(2);
 
 //initialize height and width
 let measures;
-let minHeight = 5;
-let minWidth = 19;
+const minHeight = 5;
+const minWidth = 19;
 let height;
 let width;
 
@@ -43,6 +58,14 @@ if (/\d*x\d*/.test(Args[0]) === true) {
 else if (Args[0] === 'ask') {
   hueChoice = readline.question('Enter a color: ');
   luminosityChoice = readline.question('Enter a hue (light/dark): ');
+  if (
+    allowedInput.color.includes(hueChoice) === false ||
+    allowedInput.hue.includes(luminosityChoice) === false
+  ) {
+    console.log(
+      `These are not valid arguments. Please use Color: ${allowedInput.color} and Hue: ${allowedInput.hue} `,
+    );
+  }
 } else {
   hueChoice = Args[0]; //saves hue choice, first user supplied argument
   luminosityChoice = Args[1];
