@@ -12,11 +12,15 @@ let symbol = '#';
 const Args = process.argv.slice(2);
 
 //initialize height and width
+let measures;
 let minHeight = 5;
 let minWidth = 19;
 let height;
 let width;
-let measures;
+
+//initialize color choices
+let hueChoice = '';
+let luminosityChoice = '';
 
 if (/\d*x\d*/.test(Args[0]) === true) {
   // test if first argument matches Regex (digtsxdigits)
@@ -31,13 +35,12 @@ if (/\d*x\d*/.test(Args[0]) === true) {
     width = minWidth;
     console.log(`Too small, I set the height to ${minWidth}.`);
   }
-}
+  hueChoice = Args[1]; //saves hue choice, first user supplied argument
+  luminosityChoice = Args[2];
+} // saves luminosity choice, second user supplied argument
 
-//initialize color choices
-let hueChoice = '';
-let luminosityChoice = '';
 //if the first argument is ask, ask for input:
-if (Args[0] === 'ask') {
+else if (Args[0] === 'ask') {
   hueChoice = readline.question('Enter a color: ');
   luminosityChoice = readline.question('Enter a hue (light/dark): ');
 } else {
