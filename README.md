@@ -5,7 +5,7 @@
 Great Way to generate randomly colored squares in the console.
 Github repository: https://github.com/thorinaboenke/rainbow
 Repl Link:
-[![Run on Repl.it](https://repl.it/badge/github/thorinaboenke/rainbow)](https://repl.it/github/thorinaboenke/rainbow)
+[![Run on Repl.it](https://repl.it/badge/github/thorinaboenke/rainbow)](https://repl.it/@thorinaboenke/rainbow-2#.replit)
 
 TO RUN:
 
