@@ -34,5 +34,5 @@ Dimensions of the square can optionally be entered as a first argument in the fo
 Width x Height <WWxHH>
 
 ```sh
-$ node index.js 20x40>
+$ node index.js 20x40
 ```
