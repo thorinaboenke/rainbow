@@ -13,7 +13,7 @@ TO RUN:
 $ node index.js
 ```
 
-will generate a square of a random color labelled with the colors hex code.
+Will generate a square of a random color labelled with the colors hex code.
 
 Accepts the following user arguments
 
@@ -30,7 +30,7 @@ $ node index.js ask
 
 prompts the user to enter hue and color.
 
-Dimensions of the square can optionally be enteres as a first argument in the format
+Dimensions of the square can optionally be entered as a first argument in the format
 Width x Height <WWxHH>
 
 ```sh
