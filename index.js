@@ -21,41 +21,44 @@ const allowedInput = {
 //initialize a random hex color variable and print it out
 let colorChoice = randomcolor();
 const symbol = '#';
+let measures;
+let height = 5;
+let width = 19;
 
 // get the user input from the process.argv if supplied//const Args = process.argv[2].split('x');
 // creates an array from third argument onwards
-const Args = process.argv.slice(2);
-
-//initialize height and width
-let measures;
-const minHeight = 5;
-const minWidth = 19;
-let height;
-let width;
+const args = process.argv.slice(2);
 
 //initialize color choices
-let hueChoice = '';
-let luminosityChoice = '';
+let hueChoice;
+let luminosityChoice;
 
-if (/\d*x\d*/.test(Args[0]) === true) {
+if (/\d*x\d*/.test(args[0]) === true) {
+  //initialize min height and width
+  const minHeight = 5;
+  const minWidth = 19;
   // test if first argument matches Regex (digtsxdigits)
   measures = process.argv[2].split('x'); //generate array from string
-  height = parseInt(measures[0]);
-  width = parseInt(measures[1]);
+  width = parseInt(measures[0]);
+  height = parseInt(measures[1]);
   if (height < minHeight) {
     height = minHeight;
-    console.log(`Too small, I set the height to ${minHeight}.`);
+    console.log(
+      `The height is oo small, I set the height to the min. value ${minHeight}.`,
+    );
   }
   if (width < minWidth) {
     width = minWidth;
-    console.log(`Too small, I set the height to ${minWidth}.`);
+    console.log(
+      `The width is too small, I set the height to the min. value ${minWidth}.`,
+    );
   }
-  hueChoice = Args[1]; //saves hue choice, first user supplied argument
-  luminosityChoice = Args[2];
+  hueChoice = args[1]; //saves hue choice, first user supplied argument
+  luminosityChoice = args[2];
 } // saves luminosity choice, second user supplied argument
 
 //if the first argument is ask, ask for input:
-else if (Args[0] === 'ask') {
+else if (args[0] === 'ask') {
   hueChoice = readline.question('Enter a color: ');
   luminosityChoice = readline.question('Enter a hue (light/dark): ');
   if (
@@ -67,8 +70,8 @@ else if (Args[0] === 'ask') {
     );
   }
 } else {
-  hueChoice = Args[0]; //saves hue choice, first user supplied argument
-  luminosityChoice = Args[1];
+  hueChoice = args[0]; //saves hue choice, first user supplied argument
+  luminosityChoice = args[1];
 } // saves luminosity choice, second user supplied argument
 
 userSelectedColorAsHex = randomcolor({
@@ -85,82 +88,83 @@ if (userSelectedColorAsHex !== undefined) {
   );
 }
 
-//define function that console.logs a square of 30x10 # in a random color
-// width defined via creating an new array with width
-function makeSquare(
-  width = 30,
-  height = 10,
-  symbol = '#',
-  color = colorChoice,
-) {
-  const arrLine = new Array(width).fill(symbol);
-  const line = arrLine.join('');
-  for (let i = 0; i < height; i++) {
-    console.log(chalk.hex(color)(line));
-  }
-}
-
-//define function that console.logs a square of 30x10 # in a random color
-// width defined via appending to a string
-function makeSquareViaString(
-  width = 30,
-  height = 10,
-  symbol = '#',
-
-  color = colorChoice,
-) {
-  let line = '';
-  for (let i = 0; i < width; i++) {
-    line += symbol;
-  }
-  for (let i = 0; i < height; i++) {
-    console.log(chalk.hex(color)(line));
-  }
-}
-
-function makeBloc(width = 30, height = 10, symbol = '#', color = '#ffffff') {
-  const blocHeight = Math.floor((height - 3) / 2);
-  const blocHeight1 = blocHeight;
-  let blocHeight2 = blocHeight;
+function makeBlock(width = 30, height = 10, symbol = '#', color = '#ffffff') {
+  const blockHeight = Math.floor((height - 3) / 2);
+  const upperBlockHeight = blockHeight;
+  let lowerBlockHeight = blockHeight;
   if (height % 2 === 0) {
-    blocHeight2 += 1;
+    lowerBlockHeight += 1;
   }
   const arrLine = new Array(width).fill(symbol);
   const line = arrLine.join('');
   //prints first half
-  for (let i = 0; i < blocHeight1; i++) {
+  for (let i = 0; i < upperBlockHeight; i++) {
     console.log(chalk.hex(color)(line));
   }
 
   //prints 'label'
   const margin = 5;
-  let padding1 = Math.floor((width - margin * 2 - 7) / 2);
-  let padding2 = padding1;
+  let leftBlock = Math.floor((width - margin * 2 - 7) / 2);
+  let rightBlock = leftBlock;
   if (width % 2 === 0) {
-    padding2 += 1;
+    rightBlock += 1;
   }
 
   const leftArr = new Array(margin).fill(symbol);
   const rightArr = new Array(margin).fill(symbol);
   const gap = new Array(width - margin * 2).fill(' ');
   let lineWithGap = leftArr.concat(gap, rightArr);
-  let lineWithGap2 = lineWithGap.join('');
+  let lineWithGapJoined = lineWithGap.join('');
 
-  let smallGap1 = new Array(padding1).fill(' ');
-  let smallGap2 = new Array(padding2).fill(' ');
+  let leftGap = new Array(leftBlock).fill(' ');
+  let rightGap = new Array(rightBlock).fill(' ');
 
-  let lineWithColor = leftArr
-    .concat(smallGap1, color, smallGap2, rightArr)
+  let lineWithColorName = leftArr
+    .concat(leftGap, color, rightGap, rightArr)
     .join('');
-  console.log(chalk.hex(color)(lineWithGap2));
-  console.log(chalk.hex(color)(lineWithColor));
-  console.log(chalk.hex(color)(lineWithGap2));
+  console.log(chalk.hex(color)(lineWithGapJoined));
+  console.log(chalk.hex(color)(lineWithColorName));
+  console.log(chalk.hex(color)(lineWithGapJoined));
   //prints second half
-  for (let i = 0; i < blocHeight2; i++) {
+  for (let i = 0; i < lowerBlockHeight; i++) {
     console.log(chalk.hex(color)(line));
   }
 }
 
-makeBloc(width, height, symbol, colorChoice);
+makeBlock(width, height, symbol, colorChoice);
+
+//define function that console.logs a square of 30x10 # in a random color
+// width defined via creating an new array with width
+// function makeSquare(
+//   width = 30,
+//   height = 10,
+//   symbol = '#',
+//   color = colorChoice,
+// ) {
+//   const arrLine = new Array(width).fill(symbol);
+//   const line = arrLine.join('');
+//   for (let i = 0; i < height; i++) {
+//     console.log(chalk.hex(color)(line));
+//   }
+// }
+
+//define function that console.logs a square of 30x10 # in a random color
+// // width defined via appending to a string
+// function makeSquareViaString(
+//   width = 30,
+//   height = 10,
+//   symbol = '#',
+
+//   color = colorChoice,
+// ) {
+//   let line = '';
+//   for (let i = 0; i < width; i++) {
+//     line += symbol;
+//   }
+//   for (let i = 0; i < height; i++) {
+//     console.log(chalk.hex(color)(line));
+//   }
+// }
+
 //makeSquare(width, height, symbol, colorChoice);
 //makeSquareViaString(width, height, symbol, colorChoice);

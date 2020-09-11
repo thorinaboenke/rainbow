@@ -2,6 +2,7 @@ node_modules
 randomHexColor.js
 draft.js
 colorNameToHex.js
-yarn.error.lock
+yarn.error.log
+drafts/
 
 
