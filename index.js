@@ -74,7 +74,7 @@ else if (args[0] === 'ask') {
   luminosityChoice = args[1];
 } // saves luminosity choice, second user supplied argument
 
-let userSelectedColorAsHex = randomcolor({
+const userSelectedColorAsHex = randomcolor({
   luminosity: luminosityChoice,
   hue: hueChoice,
 }); // converts color name into hex value
