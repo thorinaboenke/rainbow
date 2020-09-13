@@ -44,13 +44,13 @@ if (/\d*x\d*/.test(args[0]) === true) {
   if (height < minHeight) {
     height = minHeight;
     console.log(
-      `The height is oo small, I set the height to the min. value ${minHeight}.`,
+      `The height is too small, I set the height to the min. value ${minHeight}.`,
     );
   }
   if (width < minWidth) {
     width = minWidth;
     console.log(
-      `The width is too small, I set the height to the min. value ${minWidth}.`,
+      `The width is too small, I set the width to the min. value ${minWidth}.`,
     );
   }
   hueChoice = args[1]; //saves hue choice, first user supplied argument
@@ -74,7 +74,7 @@ else if (args[0] === 'ask') {
   luminosityChoice = args[1];
 } // saves luminosity choice, second user supplied argument
 
-userSelectedColorAsHex = randomcolor({
+let userSelectedColorAsHex = randomcolor({
   luminosity: luminosityChoice,
   hue: hueChoice,
 }); // converts color name into hex value
